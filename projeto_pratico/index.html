@@ -10,8 +10,12 @@
     <input
       type="text"
       id="wallet__address"
-      placeholder="Digite o
-endereço da carteira"
+      placeholder="Digite o endereço da carteira"
+      required
+      minlength="42"
+      maxlength="42"
+      pattern="^0x[a-fA-F0-9]{40}$"
+      title="O endereço Ethereum deve começar com 0x seguido de 40 caracteres hexadecimais (a-f, A-F, 0-9)"
     />
     <button id="check__balance">Consultar Saldo</button>
     <button id="check__transactions">Ver Transações</button>
