@@ -1,11 +1,2 @@
 /node_modules
 README_PRIVADO.md
-/img
-/dist
-EXPLICACAO.md
-tsconfig.json
-webpack.config.js
-package-lock.json
-package.json
-/src
-index.html
