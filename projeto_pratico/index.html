@@ -17,8 +17,16 @@
       pattern="^0x[a-fA-F0-9]{40}$"
       title="O endereço Ethereum deve começar com 0x seguido de 40 caracteres hexadecimais (a-f, A-F, 0-9)"
     />
+    <label for="network">Escolha a rede:</label>
+    <select id="network">
+      <option value="mainnet">Mainnet</option>
+      <option value="rinkeby">Rinkeby</option>
+      <option value="ropsten">Ropsten</option>
+      <option value="kovan">Kovan</option>
+    </select>
     <button id="check__balance">Consultar Saldo</button>
     <button id="check__transactions">Ver Transações</button>
+    <button id="check__more-transactions">Ver +5 Transações</button>
     <p id="balance"></p>
     <div id="transactions"></div>
     <script src="bundle.js"></script>
