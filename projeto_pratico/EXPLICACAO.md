@@ -1,55 +1,88 @@
-<p>Explicando os erros que eu encontrei enquanto fazia o projeto e quais eu consegui resolver</p>
+# Explicando os Erros que Encontrei e Soluções
 
-ao copiar o codigo e tentar rodar tive erro no app.ts ao tentar rodar usando o import tive erros nos utils ao mudar do import para o require os erros dos utils sumiu .
-o erro do tx era por ele nao ter tipo nenhum tipo declarado para from , value e to
+## 1. Erros com Importações no `app.ts`
 
-entao o codigo saiu de imagem do trecho de codigo antes
-![before solution](img/image-1.png)
+Ao iniciar o projeto, encontrei alguns problemas ao tentar utilizar `import` em `app.ts`. A importação com `import` causou erros no `utils`. Alterando as declarações de `import` para `require`, os erros desapareceram.
 
-codigo depoisa
-![after solution](img/image-2.png)
+- **Antes da solução:**
+  ![Imagem Antes](img/image-1.1.png)
 
-apos resolver esses erros e tentar usar o npm run build e npm start entao atualizei o package.json e as bibliotecas,
-o erro eram esses
+- **Depois da solução:**
+  ![Imagem Depois](img/image-2.2.png)
 
-<ul>
-<li>npm <strong style="color:red;">error</strong> Missing script: "build"</li>
-<li>npm <strong style="color:red;">error</strong> Missing script: "start"</li>
-</ul>
+## 2. Problemas com `package.json`
 
-fazendo com que o antes seja assim
-![alt text](img/image-3.png)
-depois
-![alt text](img/image-4.png)
+Ao tentar executar `npm run build` e `npm start`, encontrei erros que indicavam scripts ausentes no `package.json`:
 
-<h2>alterei os id no html e no app.ts para que eles ficassem iguais e funcionassem corretamente</h2>
+- **Erro do npm**: **Missing script: "build"**
+- **Erro do npm**: **Missing script: "start"**
 
+Corrigi o `package.json` para incluir esses scripts:
 
-<h3>Antes</h3>
-<br>
-<div style="display:flex; justify-content:;space-beetwen;">
+- **Antes:**
+  ![Imagem Antes](img/image-3.png)
 
-![before app.ts](img/image-5.png)
-![before index.html](img/image-6.png)
+- **Depois:**
+  ![Imagem Depois](img/image-4.png)
 
-</div>
-<br>
-<br>
-<h3>Depois</h3>
-<br>
-<div style="display:flex; justify-content:;space-beetwen;">
+## 3. Inconsistência de IDs no HTML e no `app.ts`
 
-![after app.ts](img/image-7.png)
-![after index.html](img/image-7.png)
+Ajustei os IDs no HTML e no `app.ts` para garantir consistência, evitando problemas de referência.
 
-</div>
-porem depois de fazer isso ao tentar usar o input ou os botoes o erro do utils voltou a aparecer e como nao consegui resolver e nao achei alguma explicação pelo google , eu usei a ia indicada pelo professor 
-e aparentemente era um erro de versao do ethers(ai eu desisntalei e intalei todos os pacotes usando @latest) e a forma com que o tsconfig estava configurado no inicio ele estava configgurado para 
+- **Antes:**
+  <div style="display:flex; justify-content:space-between;">
+    ![Imagem Antes no app.ts](img/image-5.png)
+    ![Imagem Antes no index.html](img/image-6.png)
+  </div>
 
-![alt text](img/image-8.png)
+- **Depois:**
+  <div style="display:flex; justify-content:space-between;">
+    ![Imagem Depois no app.ts](img/image-7.png)
+    ![Imagem Depois no index.html](img/image-7.png)
+  </div>
 
-E alterei as linhas para que ficassem assim
-![alt text](img/image-9.png)
-mudando o module para NodeNext e adicionei o  moduleResolution nodenext ai a compatiibilidade ficou melhor 
+## 4. Problema de Compatibilidade com `ethers.js`
 
-pos isso eu novamente mudei o app.ts pois a forma que o ether atualizado funciona era diferente do inicio 
+Após corrigir os IDs, encontrei um novo erro no `utils`. Identifiquei que era um problema de versão do `ethers.js`. Reinstalei o pacote com `@latest` e modifiquei o `tsconfig.json` para compatibilidade:
+
+- **Antes do `tsconfig`**:
+  ![Imagem Antes](img/image-8.png)
+
+- **Depois**:
+  ![Imagem Depois](img/image-9.png)
+
+Ajustei `module` para `NodeNext` e adicionei `moduleResolution: nodenext`.
+
+## Principais Mudanças Implementadas
+
+### Importações
+
+Para acessar `ethers` diretamente, alterei o método de importação:
+
+- **Antes**:
+  ![Antes](img/image-1.1.png)
+- **Depois**:
+  ![Depois](img/image-2.2.png)
+
+### Provider
+
+Substituí o provider fixo pelo `JsonRpcProvider`.
+
+### Seleção de Rede
+
+Adicionei um `<select>` no HTML para que o usuário possa escolher a rede.
+
+### Busca de Transações
+
+Modifiquei a busca de transações para usar a API do `etherscan.io`, substituindo o método `getHistory`.
+
+### Paginação de Transações
+
+Implementei uma funcionalidade para carregar 5 transações por vez, com p botão visualizar +5.
+
+## Extras Implementados
+
+- **Validação de Endereço**: Verifica se o endereço digitado é válido.
+- **Exibição da Data da Transação**: A data da transação é exibida em formato legível.
+- **Suporte a Múltiplas Redes**: A seleção de redes permite a escolha de Mainnet, Rinkeby, Ropsten e Kovan.
+- **Paginação**: Paginação de 5 em 5 transações.
